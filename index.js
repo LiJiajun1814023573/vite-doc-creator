@@ -6,6 +6,8 @@ const {
 } = require('./init');
 
 
+const { mdToHtml } = require('./compile');
+
 class ViteDocCreator {
   constructor (options) {
     this.options = {
@@ -32,6 +34,9 @@ class ViteDocCreator {
     initFiles(this.options);
     // 初始化监听html与markdown文件及相应文件夹变化的程序
     // initWatchers(this.options);
+
+    // 测试
+    mdToHtml('/5_webpack_服务端配置.md');
   }
 }
 

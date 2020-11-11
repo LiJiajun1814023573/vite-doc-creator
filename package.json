@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/LiJiajun1814023573/vite-doc-creator#readme",
   "dependencies": {
+    "highlight.js": "^10.3.2",
     "marked": "^1.2.3"
-  }
+  },
+  "devDependencies": {}
 }

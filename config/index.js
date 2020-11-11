@@ -17,11 +17,11 @@ const title = 'This is my first Document by Vite-Doc-Creator'
 */
 
 const outerPath = {
-  srcPath: resolve(__diranme, '../../../src/'),
+  srcPath: resolve(__dirname, '../../../src/'),
   htmlPath: resolve(__dirname, '../../../src/html/'),
   jsPath: resolve(__dirname, '../../../src/js/'),
   cssPath: resolve(__dirname, '../../../src/css/'),
-  mdPath: resolve(__dirname, '../../../workspace/')
+  mdPath: resolve(__dirname, '../../../workspace/'),
   rootPath: resolve(__dirname, '../../../'),
 }
 
@@ -43,10 +43,22 @@ const innerDir = {
   jsDir: resolve(__dirname, '../temp_files/js'),
 }
 
+const regexp = {
+  // 比较明确
+  // 匹配ul menu-list内部内容
+  reg_ulContent: /<ul class=\"menu-list\">([\s\S]*?)<\/ul>/,
+  // 匹配title中的内容
+  reg_titleContent: /<title>([\s\S]*?)<\/title>/,
+  // 匹配header-title中的内容
+  reg_headerTitleContent: /<h1 class=\"header-title\">([\s\S]*?)<\/h1>/,
+  reg_iframeContent: /<div class=\"iframe-page\">([\s\S]*?)<\/div>/
+};
+
 module.exports = {
   title,
   port,
   domain,
   outerPath,
   innerDir,
+  regexp,
 }

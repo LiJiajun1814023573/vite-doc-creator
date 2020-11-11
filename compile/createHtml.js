@@ -28,7 +28,7 @@ const {
   }
 } = require('../config');
 
-function createIndexHtml (options) {
+function createIndexHtml (options, outerFileName) {
   const _htmlFiles = readdirSync(htmlPath);
 
   // 如果外层html文件夹为空，则将模板index.html直接复制到外层根目录
@@ -46,18 +46,20 @@ function createIndexHtml (options) {
   
   let menuList = '';
   let newHtml = '';
-
+  // 如果outerFilename传入,找这个文件名在_htmlFiles中的下标
+  // 作为菜单active设置和iframe选择文件的index
+  let curIdx = outerFileName ? [].indexOf.call(_htmlFiles, outerFileName) : 0;
 
   // 遍历外层html文件夹下所有的文件，并组合成menuList
   _htmlFiles.map(function (filename, index) {
-    menuList += createMenuItem(filename, options.domain, options.port, !index ? true : false)
+    menuList += createMenuItem(filename, options.domain, options.port, index === curIdx? true : false)
   })
 
   // 替换ul,title,h1,frame中的内容
   newHtml = replaceHtml(reg_ulContent, _indexHtmlStr, menuList);
   newHtml = replaceHtml(reg_titleContent, newHtml, options.title || title);
   newHtml = replaceHtml(reg_headerTitleContent, newHtml, options.title || title);
-  newHtml = replaceHtml(reg_iframeContent, newHtml, createIframe(_htmlFiles[0], options.domain, options.port));;
+  newHtml = replaceHtml(reg_iframeContent, newHtml, createIframe(_htmlFiles[curIdx], options.domain, options.port));;
 
   console.log(newHtml);
 
